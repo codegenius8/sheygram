@@ -38,7 +38,7 @@ class DefaultLayout extends React.Component {
           left : 0,
           width : "100%",
           padding : 0, 
-          zIndex : 9999
+          zIndex : 9
           
         }}>
            <div className="d-flex justify-content-between align-items-center bs1">

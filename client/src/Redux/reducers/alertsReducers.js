@@ -3,7 +3,8 @@ const initialState = {
     likeorunlikeloading : false,
     addcommentloading : false,
     followloading : false,
-    unfollowloading : false
+    unfollowloading : false,
+   
 }
 export const alertsReducers = (state = initialState, action) => {
   // console.log(action.payload)
@@ -40,6 +41,8 @@ export const alertsReducers = (state = initialState, action) => {
           ...state,
           unfollowloading : action.payload
       };
+
+   
     
 
     default:

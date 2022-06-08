@@ -65,3 +65,33 @@ export const addComment = (value) => async (dispatch) => {
     message.error("something went wrong");
   }
 };
+
+export const EditPost = (values) => async (dispatch) => {
+  console.log(values);
+  
+  dispatch({ type: "LOADING", payload: true });
+  try {
+    await axios.post("http://localhost:5000/api/posts/editpost", values);
+    dispatch({ type: "LOADING", payload: false });
+    message.success("post edited successfully");
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "LOADING", payload: false });
+    message.error("something went wrong");
+  }
+};
+
+export const deletePost = (values) => async (dispatch) => {
+  console.log(values);
+  
+  dispatch({ type: "LOADING", payload: true });
+  try {
+    await axios.post("http://localhost:5000/api/posts/deletepost", values);
+    dispatch({ type: "LOADING", payload: false });
+    message.success("post edited successfully");
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "LOADING", payload: false });
+    message.error("something went wrong");
+  }
+};

@@ -77,7 +77,7 @@ const Profile = () => {
           {(user.followers.find((obj) => obj === currentUser._id) ||
             user.privateAccount === false ||
             user._id === currentUser._id) ? (
-            <Row>
+            <Row gutter={16}>
               {userPost.map((post) => (
                 <Col lg={5} sm={24} xs={24}>
                   <Posts post={post} postInProfilePage={true} />

@@ -18,11 +18,35 @@ router.post("/addpost", async (req, res) => {
     res.status(500).send(error);
   }
 });
+
+router.post("/editpost", async (req, res) => {
+  console.log("edited data", req.body);
+  try {
+    await Post.updateOne({ _id: req.body.postId }, req.body);
+    res.status(200).send("comment edited successfully");
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+
+router.post("/deletepost", async (req, res) => {
+  console.log("deleted data", req.body);
+  try {
+    await Post.findByIdAndDelete({ _id: req.body.postId });
+    res.status(200).send("comment deleted successfully");
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+
 router.post("/getAllPosts", async (req, res) => {
   const { userId } = req.body;
   // console.log(userId)
   try {
-    const AllPosts = await Post.find().populate('user').sort({createdAt : - 1}).exec();
+    const AllPosts = await Post.find()
+      .populate("user")
+      .sort({ createdAt: -1 })
+      .exec();
     //  console.log(AllPosts)
     res.status(200).send(AllPosts);
   } catch (error) {
@@ -66,14 +90,13 @@ router.post("/addcomment", async (req, res) => {
   try {
     const posts = await Post.findOne({ _id: req.body.postId });
     var comments = posts.comments;
-    
 
     comments.push({
       user: req.body.userId,
       date: moment().format("MMM DD yyyy"),
       comments: req.body.comments,
     });
-    
+
     posts.comments = comments;
     await Post.updateOne({ _id: req.body.postId }, posts);
 
